@@ -41,7 +41,7 @@ open class EventDispatcher<T: BaseEvent> {
         return this
     }
 
-    fun dispose() {
+    open fun dispose() {
         listeners.clear()
     }
 }

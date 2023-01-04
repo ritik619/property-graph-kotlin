@@ -55,7 +55,7 @@ open class GraphEdge<Parent : GraphNode<Map<String,Any>>, Child : GraphNode<Map<
     }
 
     /** Destroys a (currently intact) edge, updating both the graph and the owner. */
-    fun dispose() {
+    override fun dispose() {
         if (this.disposed) return
         this.disposed = true
         this.dispatchEvent(GraphEdgeEvent("dispose", this))
