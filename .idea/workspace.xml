@@ -6,10 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="1f36c6b9-593f-4cd2-9090-b364dbf409dc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/EventDispatcher.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/EventDispatcher.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Graph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Graph.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphEdge.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphEdge.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphNode.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphNode.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/constants.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +37,9 @@
         <option name="workspaceImportEnabled" value="true" />
       </MavenImportingSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2Jqo0OrvYJdoXNI5OJscVJ69ZkX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">

@@ -14,8 +14,9 @@ typealias Literal =Any?
 typealias LiteralKeys = Any
 typealias RefKeys= Any
 typealias RefListKeys = Any
-typealias RefMapKeys = Any
+//typealias RefMapKeys = Any
 
 typealias Ref<T> = GraphEdge<GraphNode<T>, GraphNode<T>>
 typealias RefMap<T> = Map<String, Ref<T>>
 typealias UnknownRef = Any
+

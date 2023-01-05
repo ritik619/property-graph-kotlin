@@ -2,7 +2,7 @@
  * Represents a connection between two {@link GraphNode} resources in a {@link Graph}.
  *
  * The left node is considered the owner, and the right node the resource. The
- * owner is responsible for being able find and remove a reference to a resource, given
+ * owner is responsible for being able to find and remove a reference to a resource, given
  * that link. The resource does not hold a reference to the link or to the owner,
  * although that reverse lookup can be done on the graph.
  *
@@ -11,7 +11,7 @@
 open class GraphEdge<Parent : GraphNode<Map<String,Any>>, Child : GraphNode<Map<String,Any>>> (
     private val name: String,
     private val parent: Parent,
-    private var child: Child,
+    var child: Child,
     private var attributes: MutableMap<String, Any> = mutableMapOf()
 ) : EventDispatcher<GraphEdgeEvent>() {
 
@@ -58,7 +58,7 @@ open class GraphEdge<Parent : GraphNode<Map<String,Any>>, Child : GraphNode<Map<
     override fun dispose() {
         if (this.disposed) return
         this.disposed = true
-        this.dispatchEvent(mapOf("dispose" to  this))
+        this.dispatchEvent("dispose" as BaseEvent)
         super.dispose()
     }
 

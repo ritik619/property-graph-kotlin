@@ -1,24 +1,21 @@
+interface BaseEvent {
+    val type: String
+    operator fun get(attachment: String): Any?
+}
+
+interface GraphEvent : BaseEvent {
+    val target: GraphNode<Map<String,Any>>
+}
+
+interface GraphNodeEvent : BaseEvent {
+    val target: GraphNode<Map<String,Any>>
+}
+
+interface GraphEdgeEvent : BaseEvent {
+    val target: GraphEdge<GraphNode<Map<String,Any>>, GraphNode<Map<String,Any>>>
+}
+
 typealias EventListener<E> = (event: E) -> Unit
-
-sealed class BaseEvent {
-    abstract val type: String
-    abstract val attachments: Map<String, Any>
-}
-
-class GraphEvent(val target: Graph<GraphNode<Map<String,Any>>>) : BaseEvent() {
-    override val type: String = "GraphEvent"
-    override val attachments: Map<String, Any> = emptyMap()
-}
-
-class GraphNodeEvent(val target: GraphNode<Map<String,Any>>) : BaseEvent() {
-    override val type: String = "GraphNodeEvent"
-    override val attachments: Map<String, Any> = emptyMap()
-}
-
-class GraphEdgeEvent(val target: GraphEdge<GraphNode<Map<String,Any>>, GraphNode<Map<String,Any>>>) : BaseEvent() {
-    override val type: String = "GraphEdgeEvent"
-    override val attachments: Map<String, Any> = emptyMap()
-}
 
 open class EventDispatcher<T: BaseEvent> {
     private val listeners: MutableMap<String, List<EventListener<T>>> = mutableMapOf()
@@ -36,8 +33,8 @@ open class EventDispatcher<T: BaseEvent> {
         return this
     }
 
-    open fun dispatchEvent(event: Map<String, Any?>): EventDispatcher<T> {
-        listeners[event.type]?.forEach { it(event) }
+    open fun dispatchEvent(event: BaseEvent): EventDispatcher<T> {
+        listeners[event.type]?.forEach { it(event as T) }
         return this
     }
 
