@@ -28,7 +28,7 @@ class Graph<GraphNode> : EventDispatcher<BaseEvent>() {
     }
 
     /** Returns a list of all edges on the graph having the given node as their parent. */
-    private fun listChildEdges(node: Any): Set<Ref<Map<String,Any>>> {
+    fun listChildEdges(node: Any): Set<Ref<Map<String,Any>>> {
         return _parentEdges[node] ?: _emptySet
     }
 

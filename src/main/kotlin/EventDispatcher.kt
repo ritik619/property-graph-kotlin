@@ -36,7 +36,7 @@ open class EventDispatcher<T: BaseEvent> {
         return this
     }
 
-    fun dispatchEvent(event: T): EventDispatcher<T> {
+    open fun dispatchEvent(event: Map<String, Any?>): EventDispatcher<T> {
         listeners[event.type]?.forEach { it(event) }
         return this
     }

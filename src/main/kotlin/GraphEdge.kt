@@ -58,7 +58,7 @@ open class GraphEdge<Parent : GraphNode<Map<String,Any>>, Child : GraphNode<Map<
     override fun dispose() {
         if (this.disposed) return
         this.disposed = true
-        this.dispatchEvent(GraphEdgeEvent("dispose", this))
+        this.dispatchEvent(mapOf("dispose" to  this))
         super.dispose()
     }
 

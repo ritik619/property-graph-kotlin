@@ -1,25 +1,25 @@
-typealias GraphNodeAttributesInternal<Parent extends GraphNode, Attributes extends {}> = {
-    [Key in keyof Attributes]: Attributes[Key] extends GraphNode
-    ? GraphEdge<Parent, Attributes[Key]>
-    : Attributes[Key] extends GraphNode[]
-    ? GraphEdge<Parent, Attributes[Key][number]>[]
-    : Attributes[Key] extends { [key: string]: GraphNode }
-    ? Record<string, GraphEdge<Parent, Attributes[Key][string]>>
-    : Attributes[Key]
-}
+//typealias GraphNodeAttributesInternal<Parent extends GraphNode, Attributes extends {}> = {
+//    [Key in keyof Attributes]: Attributes[Key] extends GraphNode
+//    ? GraphEdge<Parent, Attributes[Key]>
+//    : Attributes[Key] extends GraphNode[]
+//    ? GraphEdge<Parent, Attributes[Key][number]>[]
+//    : Attributes[Key] extends { [key: string]: GraphNode }
+//    ? Record<string, GraphEdge<Parent, Attributes[Key][string]>>
+//    : Attributes[Key]
+//}
 
-const val $attributes = Symbol('attributes')
-const val $immutableKeys = Symbol('immutableKeys')
+//const val $attributes = Symbol('attributes')
+//const val $immutableKeys = Symbol('immutableKeys')
 
-abstract class GraphNode<Attributes : Map<String, Any> = emptyMap()> : EventDispatcher<GraphNodeEvent> {
+//abstract class GraphNode<Attributes : Map<String, Any>> = emptyMap()> : EventDispatcher<GraphNodeEvent> {
 //    abstract class GraphNode<Attributes : Map<String, Any> = emptyMap()> : EventDispatcher<GraphNodeEvent> {
-
+abstract  class  GraphNode<Attributes:Map<String,Any>> :EventDispatcher<GraphNodeEvent>{
     private var disposed = false
-    protected val graph: Graph<GraphNode>
+    protected val graph: Graph<GraphNode<Map<String,Any>>>
     protected val attributes: GraphNodeAttributesInternal<GraphNode<Attributes>, Attributes>
     protected val immutableKeys: MutableSet<String>
 
-    constructor(graph: Graph<GraphNode>) {
+    constructor(graph: Graph<GraphNode<Map<String,Any>>>) {
         this.graph = graph
         this.immutableKeys = mutableSetOf()
         this.attributes = this._createAttributes()
@@ -32,8 +32,8 @@ abstract class GraphNode<Attributes : Map<String, Any> = emptyMap()> : EventDisp
         val attributes = mutableMapOf<String, Any>()
         for (key in defaultAttributes!!.keys) {
             val value = defaultAttributes[key] as Any
-            if (value is GraphNode) {
-                val ref = this.graph.createEdge(key, this, value)
+            if (value is GraphNode<*>) {
+                val ref = this.graph.createEdge(key, this  as GraphNode<Map<String, Any>> , value as GraphNode<Map<String, Any>>)
                 ref.addEventListener("dispose", { value.dispose() })
                 this.immutableKeys.add(key)
                 attributes[key] = ref as Any
@@ -52,12 +52,12 @@ abstract class GraphNode<Attributes : Map<String, Any> = emptyMap()> : EventDisp
         return this.disposed
     }
 
-    fun dispose() {
+    override fun dispose() {
         if (this.disposed) return
         this.graph.listChildEdges(this).forEach { it.dispose() }
         this.graph.disconnectParents(this)
         this.disposed = true
-        this.dispatchEvent(GraphNodeEvent("dispose"))
+        this.dispatchEvent(event =)
     }
 
     fun detach(): GraphNode<Attributes> {
@@ -209,7 +209,7 @@ abstract class GraphNode<Attributes : Map<String, Any> = emptyMap()> : EventDisp
      * Events.
      */
 
-    fun dispatchEvent(event: Map<String, *>): GraphNode {
+     fun dispatchEvent(event: BaseEvent): GraphNode<Attributes> {
         super.dispatchEvent(event + mapOf("target" to this))
         graph.dispatchEvent(event + mapOf("target" to this, "type" to "node:${event["type"]}"))
         return this
