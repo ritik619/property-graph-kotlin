@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f36c6b9-593f-4cd2-9090-b364dbf409dc" name="Changes" comment="">
+    <list default="true" id="1f36c6b9-593f-4cd2-9090-b364dbf409dc" name="Changes" comment="Fixed Type bugs 4 left">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/EventDispatcher.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/EventDispatcher.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Graph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Graph.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphEdge.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphEdge.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphNode.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphNode.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/constants.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +39,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2Jqo0OrvYJdoXNI5OJscVJ69ZkX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -80,6 +80,14 @@
       <option name="presentableId" value="Default" />
       <updated>1672814753017</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fixed Type bugs 4 left">
+      <created>1672929001534</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1672929001534</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -95,5 +103,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Fixed Type bugs 4 left" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Type bugs 4 left" />
   </component>
 </project>

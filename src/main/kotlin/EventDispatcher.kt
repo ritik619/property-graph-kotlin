@@ -4,15 +4,15 @@ interface BaseEvent {
 }
 
 interface GraphEvent : BaseEvent {
-    val target: GraphNode<Map<String,Any>>
+    val target: GraphNode
 }
 
 interface GraphNodeEvent : BaseEvent {
-    val target: GraphNode<Map<String,Any>>
+    val target: GraphNode
 }
 
 interface GraphEdgeEvent : BaseEvent {
-    val target: GraphEdge<GraphNode<Map<String,Any>>, GraphNode<Map<String,Any>>>
+    val target: GraphEdge<GraphNode, GraphNode>
 }
 
 typealias EventListener<E> = (event: E) -> Unit

@@ -6,19 +6,19 @@
  *
  * @category Graph
  */
-class Graph<GraphNode : Map<String,Any>> : EventDispatcher<BaseEvent>() {
-    private val _emptySet: MutableSet<Ref<Map<String,Any>>> = mutableSetOf()
-    private val _edges: MutableSet<Ref<Map<String,Any>>> = mutableSetOf()
-    private var _parentEdges: MutableMap<Any, MutableSet<Ref<Map<String,Any>>>> = mutableMapOf()
-    private val _childEdges: MutableMap<Any, MutableSet<Ref<Map<String,Any>>>> = mutableMapOf()
+class Graph : EventDispatcher<BaseEvent>() {
+    private val _emptySet: MutableSet<Ref> = mutableSetOf()
+    private val _edges: MutableSet<GraphEdge<GraphNode, GraphNode>> = mutableSetOf()
+    private var _parentEdges: MutableMap<Any, MutableSet<Ref>> = mutableMapOf()
+    private val _childEdges: MutableMap<Any, MutableSet<Ref>> = mutableMapOf()
 
     /** Returns a list of all parent->child edges on this graph. */
-    fun listEdges(): List<Ref<Map<String,Any>>> {
+    fun listEdges(): List<Ref> {
         return _edges.toList()
     }
 
     /** Returns a list of all edges on the graph having the given node as their child. */
-    private fun listParentEdges(node: Any): Set<Ref<Map<String,Any>>> {
+    private fun listParentEdges(node: Any): Set<Ref> {
         return _childEdges[node] ?: _emptySet
     }
 
@@ -28,7 +28,7 @@ class Graph<GraphNode : Map<String,Any>> : EventDispatcher<BaseEvent>() {
     }
 
     /** Returns a list of all edges on the graph having the given node as their parent. */
-    fun listChildEdges(node: Any): Set<Ref<Map<String,Any>>> {
+    fun listChildEdges(node: Any): Set<Ref> {
         return _parentEdges[node] ?: _emptySet
     }
 
@@ -37,7 +37,7 @@ class Graph<GraphNode : Map<String,Any>> : EventDispatcher<BaseEvent>() {
         return listChildEdges(node).map { it.getChild() }
     }
 
-    fun disconnectParents(node: Any, filter: ((Any) -> Boolean)? = null): Graph<GraphNode> {
+    fun disconnectParents(node: Any, filter: ((Any) -> Boolean)? = null): Graph {
         var edges = listParentEdges(node)
         if (filter != null) {
             edges = edges.filter { filter(it.getParent()) }.toSet()
@@ -54,15 +54,22 @@ class Graph<GraphNode : Map<String,Any>> : EventDispatcher<BaseEvent>() {
      */
     fun createEdge(
         name: String,
-        a:Any,
-        b: Any,
+        a:GraphNode,
+        b: GraphNode,
         attributes: MutableMap<String, Any>? = null
     ): GraphEdge<*,*> {
-        val edge= attributes?.let { GraphEdge(name,a,b, it) }
-        return _registerEdge(edge)
-    }
+        if(attributes !=null)
+        {
+            val edge=  GraphEdge(name,a ,b, attributes)
+            return _registerEdge(edge)
 
-    private fun _registerEdge(edge: Ref<Map<String,Any>>): GraphEdge<*,*> {
+        }
+        else {
+            val edge=  GraphEdge(name,a ,b)
+            return _registerEdge(edge)
+        }}
+
+    private fun _registerEdge(edge: GraphEdge<GraphNode, GraphNode>): GraphEdge<*,*> {
         _edges.add(edge)
 
         val parent = edge.getParent()
@@ -84,7 +91,7 @@ class Graph<GraphNode : Map<String,Any>> : EventDispatcher<BaseEvent>() {
      * be invoked by the onDispose() listener created in [_registerEdge]. The
      * public method of removing an edge is [GraphEdge.dispose].
      */
-    private fun _removeEdge(edge: Ref<Map<String,Any>>): Graph<GraphNode> {
+    private fun _removeEdge(edge: Ref): Graph {
         _edges.remove(edge)
         _parentEdges[edge.getParent()]?.remove(edge)
         _childEdges[edge.getChild()]?.remove(edge)

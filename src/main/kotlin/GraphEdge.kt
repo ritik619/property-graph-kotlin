@@ -8,10 +8,10 @@
  *
  * @category Graph
  */
-open class GraphEdge<Parent : GraphNode<Map<String,Any>>, Child : GraphNode<Map<String,Any>>> (
+open class GraphEdge<Parent : GraphNode, Child : GraphNode> (
     private val name: String,
     private val parent: Parent,
-    var child: Child,
+    internal var child: Child,
     private var attributes: MutableMap<String, Any> = mutableMapOf()
 ) : EventDispatcher<GraphEdgeEvent>() {
 
@@ -34,7 +34,7 @@ open class GraphEdge<Parent : GraphNode<Map<String,Any>>, Child : GraphNode<Map<
     }
 
     /** Resource node. */
-    fun getChild(): Child {
+    fun getChild(): GraphNode {
         return this.child
     }
 
