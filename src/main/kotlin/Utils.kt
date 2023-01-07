@@ -1,4 +1,5 @@
-
+package utils
+import GraphEdge
 fun isRef(value: Any): Boolean {
     return value is GraphEdge<*,*>
 }

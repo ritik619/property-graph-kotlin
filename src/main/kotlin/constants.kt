@@ -16,7 +16,7 @@ typealias RefKeys= Any
 typealias RefListKeys = Any
 //typealias RefMapKeys = Any
 
-typealias Ref = GraphEdge<GraphNode, GraphNode>
+typealias Ref = GraphEdge<GraphNode<*>, GraphNode<*>>
 typealias RefMap = Map<String, Ref>
 typealias UnknownRef = Any
 

@@ -8,7 +8,7 @@
  *
  * @category Graph
  */
-open class GraphEdge<Parent : GraphNode, Child : GraphNode> (
+open class GraphEdge<Parent : GraphNode<*>, Child : GraphNode<*>> (
     private val name: String,
     private val parent: Parent,
     internal var child: Child,
@@ -34,7 +34,7 @@ open class GraphEdge<Parent : GraphNode, Child : GraphNode> (
     }
 
     /** Resource node. */
-    fun getChild(): GraphNode {
+    fun getChild(): GraphNode<*> {
         return this.child
     }
 
@@ -58,7 +58,7 @@ open class GraphEdge<Parent : GraphNode, Child : GraphNode> (
     override fun dispose() {
         if (this.disposed) return
         this.disposed = true
-        this.dispatchEvent("dispose" as BaseEvent)
+        this.dispatchEvent(mutableMapOf("type" to "dispose"))
         super.dispose()
     }
 

@@ -8,7 +8,7 @@
  */
 class Graph : EventDispatcher<BaseEvent>() {
     private val _emptySet: MutableSet<Ref> = mutableSetOf()
-    private val _edges: MutableSet<GraphEdge<GraphNode, GraphNode>> = mutableSetOf()
+    private val _edges: MutableSet<GraphEdge<GraphNode<*>, GraphNode<*>>> = mutableSetOf()
     private var _parentEdges: MutableMap<Any, MutableSet<Ref>> = mutableMapOf()
     private val _childEdges: MutableMap<Any, MutableSet<Ref>> = mutableMapOf()
 
@@ -54,10 +54,10 @@ class Graph : EventDispatcher<BaseEvent>() {
      */
     fun createEdge(
         name: String,
-        a:GraphNode,
-        b: GraphNode,
+        a:GraphNode<*>,
+        b: GraphNode<*>,
         attributes: MutableMap<String, Any>? = null
-    ): GraphEdge<*,*> {
+    ): GraphEdge<GraphNode<*>,GraphNode<*>> {
         if(attributes !=null)
         {
             val edge=  GraphEdge(name,a ,b, attributes)
@@ -69,7 +69,7 @@ class Graph : EventDispatcher<BaseEvent>() {
             return _registerEdge(edge)
         }}
 
-    private fun _registerEdge(edge: GraphEdge<GraphNode, GraphNode>): GraphEdge<*,*> {
+    private fun _registerEdge(edge: GraphEdge<GraphNode<*>, GraphNode<*>>): GraphEdge<GraphNode<*>,GraphNode<*>> {
         _edges.add(edge)
 
         val parent = edge.getParent()

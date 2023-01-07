@@ -1,18 +1,16 @@
-interface BaseEvent {
-    val type: String
-    operator fun get(attachment: String): Any?
+interface BaseEvent :MutableMap<String,Any>{
 }
 
 interface GraphEvent : BaseEvent {
-    val target: GraphNode
+    val target: GraphNode<*>
 }
 
 interface GraphNodeEvent : BaseEvent {
-    val target: GraphNode
+    val target: GraphNode<*>
 }
 
 interface GraphEdgeEvent : BaseEvent {
-    val target: GraphEdge<GraphNode, GraphNode>
+    val target: GraphEdge<GraphNode<*>, GraphNode<*>>
 }
 
 typealias EventListener<E> = (event: E) -> Unit
@@ -33,8 +31,8 @@ open class EventDispatcher<T: BaseEvent> {
         return this
     }
 
-    open fun dispatchEvent(event: BaseEvent): EventDispatcher<T> {
-        listeners[event.type]?.forEach { it(event as T) }
+    open fun dispatchEvent(event: MutableMap<String,Any>): EventDispatcher<T> {
+        listeners[event["type"]]?.forEach { it(event as T) }
         return this
     }
 
