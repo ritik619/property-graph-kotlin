@@ -4,16 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f36c6b9-593f-4cd2-9090-b364dbf409dc" name="Changes" comment="Fixed Type bugs 4 left">
+    <list default="true" id="1f36c6b9-593f-4cd2-9090-b364dbf409dc" name="Changes" comment="Fixed Disconnect parent type">
+      <change afterPath="$PROJECT_DIR$/propertyGraph/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/consumer-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/androidTest/java/com/flam/propertygraph/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/main/java/com/flam/propertygraph/EventDispatcher.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/main/java/com/flam/propertygraph/Graph.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/main/java/com/flam/propertygraph/GraphEdge.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/main/java/com/flam/propertygraph/GraphNode.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/main/java/com/flam/propertygraph/Main.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/main/java/com/flam/propertygraph/Utils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/main/java/com/flam/propertygraph/constants.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/propertyGraph/src/test/java/com/flam/propertygraph/ExampleUnitTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/EventDispatcher.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/EventDispatcher.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Graph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Graph.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphEdge.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphEdge.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/GraphNode.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/GraphNode.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Utils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/constants.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,11 +70,21 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "last_opened_file_path": "/Users/Exieee/IdeaProjects/kotlin-property-graph/propertyGraph/src/main/java/com/flam/propertygraph",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.38275862"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/propertyGraph/src/main/java/com/flam/propertygraph" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/propertyGraph/src/main/java/com/flam/propertygraph" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -96,7 +114,28 @@
       <option name="project" value="LOCAL" />
       <updated>1672929001534</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Converted GraphNode to abstract class and fixed type bugs">
+      <created>1673120023013</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673120023013</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fixed Event Dispatch">
+      <created>1673122667402</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1673122667402</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed Disconnect parent type">
+      <created>1673126183363</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1673126183363</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -113,7 +152,10 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Fixed Type bugs 4 left" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Type bugs 4 left" />
+    <MESSAGE value="Converted GraphNode to abstract class and fixed type bugs" />
+    <MESSAGE value="Fixed Event Dispatch" />
+    <MESSAGE value="Fixed Disconnect parent type" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Disconnect parent type" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
