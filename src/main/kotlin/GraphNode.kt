@@ -46,11 +46,18 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
     }
 
     override fun dispose() {
+//        println("edege, ${this.graph.listEdges()}")
+
         if (this.disposed) return
         this.graph.listChildEdges(this).forEach { it.dispose() }
+//        println("edege, ${this.graph.listEdges()}")
         this.graph.disconnectParents(this)
+//        println("edege, ${this.graph.listEdges()}")
+
         this.disposed = true
+
         this.dispatchEvent(mutableMapOf("type" to "dispose"))
+//        println("edege, ${this.graph.listEdges()}")
     }
 
     fun detach(): GraphNode<*> {

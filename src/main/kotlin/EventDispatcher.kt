@@ -44,6 +44,7 @@ open class EventDispatcher<T: MutableMap<String,Any>> {
     }
 
     open fun dispose() {
+//        println("super called ${this.listeners} $listeners")
         listeners.clear()
     }
 }

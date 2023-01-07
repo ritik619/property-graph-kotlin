@@ -18,8 +18,8 @@ class Graph : EventDispatcher<BaseEvent>() {
     }
 
     /** Returns a list of all edges on the graph having the given node as their child. */
-    private fun listParentEdges(node: Any): Set<Ref> {
-        return _childEdges[node] ?: _emptySet
+    private fun listParentEdges(node: Any): MutableList<GraphEdge<GraphNode<*>,GraphNode<*>>> {
+        return _childEdges[node]?.toMutableList() ?: _emptySet.toMutableList()
     }
 
     /** Returns a list of parent nodes for the given child node. */
@@ -37,12 +37,14 @@ class Graph : EventDispatcher<BaseEvent>() {
         return listChildEdges(node).map { it.getChild() }
     }
 
-    fun disconnectParents(node: Any, filter: ((Any) -> Boolean)? = null): Graph {
+    fun disconnectParents(node: GraphNode<*>, filter: ((Any) -> Boolean)? = null): Graph {
         var edges = listParentEdges(node)
+//        println("dc parent edge $edges")
         if (filter != null) {
-            edges = edges.filter { filter(it.getParent()) }.toSet()
+            edges = edges.filter { filter(it.getParent()) }.toMutableList()
         }
         edges.forEach { it.dispose() }
+//        println("dc parent edge $edges")
         return this
     }
 

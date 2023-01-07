@@ -59,7 +59,7 @@ open class GraphEdge<Parent : GraphNode<*>, Child : GraphNode<*>> (
 //        println("disposed? ${this.disposed}")
         if (this.disposed) return
         this.disposed = true
-        this.dispatchEvent(mutableMapOf("type" to "dispose"))
+        this.dispatchEvent(mutableMapOf("type" to "dispose" ,"target" to this))
 //        println("disposed? ${this.disposed}")
         super.dispose()
     }
