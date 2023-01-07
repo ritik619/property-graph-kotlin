@@ -13,7 +13,7 @@ open class GraphEdge<Parent : GraphNode<*>, Child : GraphNode<*>> (
     private val parent: Parent,
     internal var child: Child,
     private var attributes: MutableMap<String, Any> = mutableMapOf()
-) : EventDispatcher<GraphEdgeEvent>() {
+) : EventDispatcher<MutableMap<String,Any>>() {
 
     private var disposed = false
 
@@ -56,9 +56,11 @@ open class GraphEdge<Parent : GraphNode<*>, Child : GraphNode<*>> (
 
     /** Destroys a (currently intact) edge, updating both the graph and the owner. */
     override fun dispose() {
+//        println("disposed? ${this.disposed}")
         if (this.disposed) return
         this.disposed = true
         this.dispatchEvent(mutableMapOf("type" to "dispose"))
+//        println("disposed? ${this.disposed}")
         super.dispose()
     }
 

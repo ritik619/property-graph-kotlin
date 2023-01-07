@@ -162,9 +162,14 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
         attribute: String,
         value: GraphNode<*>
     ): GraphNode<*> {
+//        println("beforeedges ${this.graph.listEdges()}")
+
         val refs = this.attributes[attribute] as MutableList<GraphEdge<*,*>>
         val pruned = refs.filter { it.child == value }
-        pruned.forEach { it.dispose() } // TODO(cleanup): Possible duplicate event.
+//        println("pruned $pruned")
+        pruned.forEach { it.dispose() }
+        // TODO(cleanup): Possible duplicate event.
+//        println("afteredges ${this.graph.listEdges()}")
         return this
     }
 
