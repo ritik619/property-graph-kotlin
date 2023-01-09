@@ -100,12 +100,12 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
         return this
     }
 
-    operator fun  get(attribute: String): Any? {
+    operator fun get(attribute: String): Any? {
         return this.attributes[attribute]
     }
 
-    protected fun <K : String> set(attribute: K, value: Map<String,Any>): GraphNode<*> {
-        this.attributes[attribute]  = value
+    protected fun <K : String> set(attribute: K, value: Any): GraphNode<*> {
+        this.attributes[attribute] = value
         return this.dispatchEvent(mutableMapOf("change" to attribute) )
     }
 
