@@ -13,9 +13,13 @@ interface IPet {
 }
 
 class Person(graph: Graph) : GraphNode<IPerson>(graph) {
-    fun getDefaults(): Nullable<IPerson> {
+    override getDefaults(): Nullable<IPerson> {
         return mutableMapOf("name" to  ' ' , "age" to 0, "friends" to  emptyList<String>(), "pet" to  null)
     }
+    fun test{
+        super.getDefaults()
+    }
+
 }
 class Pet(graph: Graph) : GraphNode<IPet>(graph) {
     fun getDefaults(): Nullable<IPet> {
