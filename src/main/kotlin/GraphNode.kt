@@ -22,7 +22,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
     private fun createAttributes(): GraphNodeAttributesInternal {
         val defaultAttributes= this.getDefaults()
         val attributes = mutableMapOf<String, Any>()
-        for (key in defaultAttributes!!.keys) {
+        for (key in defaultAttributes.keys) {
             val value = defaultAttributes[key] as Any
             if (value is GraphNode<*>) {
                 val ref = this.graph.createEdge(key, this , value)
@@ -30,10 +30,10 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
                 this.immutableKeys.add(key)
                 attributes[key] = ref as Any
             } else {
-                attributes[key] = value as Any
+                attributes[key] = value
             }
         }
-        return attributes as GraphNodeAttributesInternal
+        return attributes
     }
 
     fun isOnGraph(other: GraphNode<*>): Boolean {

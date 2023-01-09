@@ -13,16 +13,15 @@ interface IPet {
 }
 
 class Person(graph: Graph) : GraphNode<IPerson>(graph) {
-    override fun getDefaults(): MutableMap<String, Any>? {
+    override fun getDefaults(): MutableMap<String, Any> {
         return mutableMapOf("name" to  ' ' , "age" to 0, "friends" to emptyList<String>(), "pet" to  ' ')
     }
 }
 class Pet(graph: Graph) : GraphNode<IPet>(graph) {
-    override fun getDefaults(): MutableMap<String,Any>? {
+    override fun getDefaults(): MutableMap<String,Any> {
     return mutableMapOf("name" to  ' ' , "type" to Animal.DOG)
     }
     fun test(){
-        super.getDefaults()
         this.getDefaults()
     }
 }
