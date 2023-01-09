@@ -15,7 +15,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
         this.attributes = this.createAttributes()
     }
 
-    open fun getDefaults(): Map<String, Any>? {
+    open fun getDefaults(): Map<String, Any> {
         return mutableMapOf("nodes" to mutableListOf<GraphNode<*>>())
     }
 
