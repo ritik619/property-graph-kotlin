@@ -2,7 +2,7 @@ interface BaseEvent :MutableMap<String,Any>{
 }
 
 interface GraphEvent : BaseEvent {
-    val target: GraphNode<*>
+    val target: Graph
 }
 
 interface GraphNodeEvent : BaseEvent {

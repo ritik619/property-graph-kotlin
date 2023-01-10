@@ -1,4 +1,3 @@
-import utils.*
 
 typealias GraphNodeAttributesInternal = MutableMap<String, Any>
 
@@ -10,7 +9,7 @@ typealias GraphNodeAttributesInternal = MutableMap<String, Any>
 abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispatcher<GraphNodeEvent>() {
     private var disposed = false
     private val attributes: GraphNodeAttributesInternal
-    private val immutableKeys: MutableSet<String> = mutableSetOf()
+    val immutableKeys: MutableSet<String> = mutableSetOf()
 
     init {
         this.attributes = this.createAttributes()
@@ -23,7 +22,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
     private fun createAttributes(): GraphNodeAttributesInternal {
         val defaultAttributes= this.getDefaults()
         val attributes = mutableMapOf<String, Any>()
-        for (key in defaultAttributes!!.keys) {
+        for (key in defaultAttributes.keys) {
             val value = defaultAttributes[key] as Any
             if (value is GraphNode<*>) {
                 val ref = this.graph.createEdge(key, this , value)
@@ -31,10 +30,10 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
                 this.immutableKeys.add(key)
                 attributes[key] = ref as Any
             } else {
-                attributes[key] = value as Any
+                attributes[key] = value
             }
         }
-        return attributes as GraphNodeAttributesInternal
+        return attributes
     }
 
     fun isOnGraph(other: GraphNode<*>): Boolean {
@@ -66,7 +65,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
     }
 
 
-    fun swap(old: GraphNode<*>, replacement: GraphNode<*>): GraphNode<*> {
+    fun swap(old: GraphNode<*>, replacement: GraphNode<Attributes>): EventDispatcher<GraphNodeEvent> {
         for (attribute in this.attributes.keys) {
             val value = this.attributes[attribute] as Any
             when {
@@ -104,7 +103,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
         return this.attributes[attribute]
     }
 
-    protected fun <K : String> set(attribute: K, value: Any): GraphNode<*> {
+    protected fun <K : String> set(attribute: K, value: Any): EventDispatcher<GraphNodeEvent> {
         this.attributes[attribute] = value
         return this.dispatchEvent(mutableMapOf("change" to attribute) )
     }
@@ -122,7 +121,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
         attribute: K,
         value: GraphNode<*>? = null,
         attributes: MutableMap<String, Any>? = null
-    ): GraphNode<*> {
+    ): EventDispatcher<GraphNodeEvent> {
         if (this.immutableKeys.contains(attribute)) {
             throw IllegalStateException("Cannot overwrite immutable attribute, \"$attribute\".")
         }
@@ -151,7 +150,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
         attribute: String,
         value: GraphNode<*>,
         attrs: MutableMap<String, Any>? = null
-    ): GraphNode<*>  {
+    ): EventDispatcher<GraphNodeEvent>  {
         val ref = this.graph.createEdge(attribute, this, value, attrs)
         val refs = this.attributes[attribute] as MutableList<GraphEdge<GraphNode<*>,GraphNode<*>>>
         refs.add(ref)
@@ -168,7 +167,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
     protected fun removeRef(
         attribute: String,
         value: GraphNode<*>
-    ): GraphNode<*> {
+    ): GraphNode<Attributes> {
 //        println("beforeedges ${this.graph.listEdges()}")
 
         val refs = this.attributes[attribute] as MutableList<GraphEdge<*,*>>
@@ -180,13 +179,13 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
         return this
     }
 
-//    fun <K : RefMapKeys<Map<String,Any>>> listRefMapKeys(key: K): Array<String> {
-//        return Object.keys(this[attributes][key] as Any) as Array<String>
-//    }
+    fun listRefMapKeys(key: String): Array<String> {
+        return this.attributes[key ] as Array<String>
+    }
 
     /** @hidden */
-//    fun <K : RefMapKeys<Map<String,Any>>> listRefMapValues(key: K): List<GraphNode> {
-//        return Object.values(this[attributes][key] as Any).map { it.getChild() }
+//    fun listRefMapValues(key: String): List<GraphNode<*>> {
+//        return (this.attributes[key] as Map<String>).map { it.getChild() }
 //    }
 //    fun
 ////            <K : RefMapKeys<Map<String,Any>>, SK : keyof Map<String,Any>[K]>
@@ -204,7 +203,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
         key: String,
         value: GraphNode<*>?,
         metadata: MutableMap<String, Any>? = null
-    ): GraphNode<*> {
+    ): EventDispatcher<GraphNodeEvent> {
         val refMap = this.attributes
 //            . attribute as Array<Any>
         val prevRef = refMap[key] as Ref
@@ -224,7 +223,7 @@ abstract class GraphNode<Attributes :Any>(private val graph: Graph) : EventDispa
      * Events.
      */
 
-    override fun dispatchEvent(event: MutableMap<String,Any>): GraphNode<*> {
+    override fun dispatchEvent(event: MutableMap<String, Any>): GraphNode<Attributes> {
         super.dispatchEvent(mutableMapOf("target" to this ,"type" to event))
         this.graph.dispatchEvent(mutableMapOf("target" to this, "type" to "node:${event["type"]}","type" to event))
         return this
