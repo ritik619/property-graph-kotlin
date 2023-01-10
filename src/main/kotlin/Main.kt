@@ -53,7 +53,7 @@ class TestNode( graph: Graph) : GraphNode<ITestNode>(graph) {
 }
 
 fun main() {
-//    Testing Edge Management
+////    Testing Edge Management
 //    val graph =  Graph();
 //    val root =  TestNode(graph);
 //    val a =  TestNode(graph);
@@ -65,7 +65,6 @@ fun main() {
 //    println("root ${ root },a ${ a },b ${ b }")
 //    println(root.listNodes())
 //    root.removeNode(a);
-//
 //    println("${root.listNodes()}, ${listOf(b)}, 'Removed a node.}")
 //    println("------------------------")
 //    b.dispose();
@@ -92,9 +91,9 @@ fun main() {
 //    root.dispose();
 //    println("${root.listNodes()}, ${emptyList<Any>()}, 'Disposed the root, confirmed empty.}")
 //    println("${root.isDisposed()}, ${true}, 'Disposed the root, confirmed disposed.}")
-
-
-//prevent cross graph edge
+//
+//
+//////prevent cross graph edge
 //    val graphA =  Graph();
 //    val graphB =  Graph();
 //
@@ -105,7 +104,7 @@ fun main() {
 //    val nodeB =  TestNode(graphB);
 //
 //    rootA.addNode(nodeA);
-
+//
 //    println("${rootB.addNode(nodeA)}, 'prevents connecting node from another graph, used")
 //    println("${rootA.addNode(nodeB)}, 'prevents connecting node from another graph, unused")
 
